@@ -1,13 +1,16 @@
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
+import { Platform, useColorScheme } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 const App = () => {
+	// const scheme = useColorScheme()
+
 	return (
 		<SafeAreaProvider>
 			<RootNavigation />
-			<StatusBar style="auto" />
+			<StatusBar style={Platform.OS === 'ios' ? 'auto' : 'light'} />
 		</SafeAreaProvider>
 	)
 }

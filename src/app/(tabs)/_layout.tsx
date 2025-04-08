@@ -2,6 +2,7 @@ import { colors, fontSize } from '@/constants/tokens'
 import { BlurView } from 'expo-blur'
 import { Tabs } from 'expo-router'
 import { StyleSheet } from 'react-native'
+import { FontAwesome, FontAwesome6, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 const TabsNavigation = () => {
 	return (
@@ -21,7 +22,7 @@ const TabsNavigation = () => {
 				headerShown: false,
 				tabBarBackground: () => (
 					<BlurView
-						intensity={95}
+						intensity={40}
 						style={{
 							...StyleSheet.absoluteFillObject,
 							overflow: 'hidden',
@@ -32,10 +33,38 @@ const TabsNavigation = () => {
 				),
 			}}
 		>
-			<Tabs.Screen name="favourites" />
-			<Tabs.Screen name="playlists" />
-			<Tabs.Screen name="(songs)" />
-			<Tabs.Screen name="artists" />
+			<Tabs.Screen
+				name="favourites"
+				options={{
+					title: 'Favourites',
+					tabBarIcon: ({ color }) => <FontAwesome name="heart" color={color} size={20} />,
+				}}
+			/>
+			<Tabs.Screen
+				name="playlists"
+				options={{
+					title: 'Playlists',
+					tabBarIcon: ({ color }) => (
+						<MaterialCommunityIcons name="playlist-play" color={color} size={28} />
+					),
+				}}
+			/>
+			<Tabs.Screen
+				name="(songs)"
+				options={{
+					title: 'Songs',
+					tabBarIcon: ({ color }) => (
+						<Ionicons name="musical-notes-sharp" color={color} size={24} />
+					),
+				}}
+			/>
+			<Tabs.Screen
+				name="artists"
+				options={{
+					title: 'Artists',
+					tabBarIcon: ({ color }) => <FontAwesome6 name="users" color={color} size={20} />,
+				}}
+			/>
 		</Tabs>
 	)
 }
