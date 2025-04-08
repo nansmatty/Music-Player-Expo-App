@@ -20,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#000000"
-      }
+      },
+      "package": "com.ndev154.musicplayer"
     },
     "web": {
       "favicon": "./assets/favicon.png"
