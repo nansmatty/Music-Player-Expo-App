@@ -24,7 +24,6 @@ export const StackScreenWithSearchBar: NativeStackNavigationOptions = {
 				},
 			}),
 		},
-		headerTransparent: false,
 		headerTitleStyle: {
 			fontSize: fontSize['2xl'],
 			color: colors.text,
