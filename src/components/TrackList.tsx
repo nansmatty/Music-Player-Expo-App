@@ -2,8 +2,9 @@ import { FlatList, FlatListProps, View } from 'react-native'
 import React from 'react'
 import TrackListItem from './TrackListItem'
 import { utilsStyles } from '@/styles'
+import { Track } from 'react-native-track-player'
 
-export type TrackListProps = Partial<FlatListProps<any>> & { tracks: any[] }
+export type TrackListProps = Partial<FlatListProps<Track>> & { tracks: Track[] }
 
 const ItemDivider = () => (
 	<View
@@ -24,6 +25,10 @@ const TrackList = ({ tracks, ...flatlistProps }: TrackListProps) => {
 	// 	return library.filter(trackTitleFilter(lower))
 	// }, [search])
 
+	const handleTrackSelect = (track: Track) => {
+		console.log(track)
+	}
+
 	return (
 		<View>
 			{/* {Platform.OS === 'android' && (
@@ -42,12 +47,7 @@ const TrackList = ({ tracks, ...flatlistProps }: TrackListProps) => {
 				ListFooterComponent={ItemDivider}
 				ItemSeparatorComponent={ItemDivider}
 				renderItem={({ item: track }) => (
-					<TrackListItem
-						track={{
-							...track,
-							image: track.artwork,
-						}}
-					/>
+					<TrackListItem track={track} onTrackSelect={handleTrackSelect} />
 				)}
 				keyExtractor={(item: any, index) => item.id || index.toString()}
 				{...flatlistProps}
