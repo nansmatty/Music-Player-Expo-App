@@ -21,19 +21,25 @@ const SongsScreen = () => {
 
 	return (
 		<View style={defaultStyles.container}>
+			<View
+				style={{
+					paddingHorizontal: 15,
+					flexDirection: 'row',
+					marginBottom: 10,
+				}}
+			>
+				{Platform.OS === 'android' && (
+					<CustomSearchHeader
+						query={search}
+						onQueryChange={setSearch}
+						placeholder="Find in songs..."
+					/>
+				)}
+			</View>
 			<ScrollView
 				contentInsetAdjustmentBehavior="automatic"
 				style={{ paddingHorizontal: screenPadding.horizontal }}
 			>
-				<View>
-					{Platform.OS === 'android' && (
-						<CustomSearchHeader
-							query={search}
-							onQueryChange={setSearch}
-							placeholder="Search for songs..."
-						/>
-					)}
-				</View>
 				<TrackList tracks={filteredTracks} scrollEnabled={false} />
 			</ScrollView>
 		</View>
