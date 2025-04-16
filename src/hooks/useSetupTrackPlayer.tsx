@@ -9,7 +9,7 @@ const setupTrackPlayer = async () => {
 	await TrackPlayer.setupPlayer({
 		maxCacheSize: 1024 * 10, // 10MB
 	})
-	await TrackPlayer.setVolume(0.03) // Set the volume to 0.03 (3%)
+	await TrackPlayer.setVolume(0.3) // Set the volume to 0.03 (3%)
 	await TrackPlayer.setRepeatMode(RepeatMode.Queue) // Set the repeat mode to Queue
 	// await TrackPlayer.updateOptions({
 	// 	capabilities: [
