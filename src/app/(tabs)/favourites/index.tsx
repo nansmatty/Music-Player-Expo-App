@@ -6,6 +6,8 @@ import TrackList from '@/components/TrackList'
 import { screenPadding } from '@/constants/tokens'
 import CustomSearchHeader from '@/components/CustomSearchHeader'
 import { useNavigationSearch } from '@/hooks/useNavigationSearch'
+import { useFavoriteTracks } from '@/store/library'
+import { trackTitleFilter } from '@/helpers/filter'
 
 const FavouritesScreen = () => {
 	const { search, setSearch } = useNavigationSearch({
@@ -14,15 +16,15 @@ const FavouritesScreen = () => {
 		},
 	})
 
+	const { favouriteTracks } = useFavoriteTracks()
+
 	const favouriteFilteredTracks = useMemo(() => {
-		if (!search) return library.filter((track) => track.rating === 1)
+		if (!search) return favouriteTracks
 
 		const lower = search.toLowerCase()
 
-		return library.filter((track) => {
-			return track.rating === 1 && track.title.toLowerCase().includes(lower)
-		})
-	}, [search])
+		return favouriteTracks.filter(trackTitleFilter(lower))
+	}, [search, favouriteTracks])
 
 	return (
 		<View style={defaultStyles.container}>
