@@ -9,7 +9,11 @@ import { trackTitleFilter } from '@/helpers/filter'
 import CustomSearchHeader from '@/components/CustomSearchHeader'
 
 const SongsScreen = () => {
-	const { search, setSearch } = useNavigationSearch({})
+	const { search, setSearch } = useNavigationSearch({
+		searchBarOptions: {
+			placeholder: 'Find in songs...',
+		},
+	})
 
 	const filteredTracks = React.useMemo(() => {
 		if (!search) return library

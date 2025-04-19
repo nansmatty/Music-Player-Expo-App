@@ -1,5 +1,4 @@
-import { View, Text } from 'react-native'
-import React, { useLayoutEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { SearchBarProps } from 'react-native-screens'
 import { colors } from '@/constants/tokens'
 import { useNavigation } from 'expo-router'
