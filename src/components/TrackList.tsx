@@ -1,12 +1,16 @@
 import { FlatList, FlatListProps, Text, View } from 'react-native'
-import React from 'react'
+import React, { useCallback, useRef } from 'react'
 import TrackListItem from '@/components/TrackListItem'
 import { utilsStyles } from '@/styles'
 import TrackPlayer, { Track } from 'react-native-track-player'
 import FastImage from 'react-native-fast-image'
 import { unknownTrackImageUri } from '@/constants/images'
+import { useQueue } from '@/store/queue'
 
-export type TrackListProps = Partial<FlatListProps<Track>> & { tracks: Track[] }
+export type TrackListProps = Partial<FlatListProps<Track>> & {
+	id: string
+	tracks: Track[]
+}
 
 const ItemDivider = () => (
 	<View
@@ -18,29 +22,60 @@ const ItemDivider = () => (
 	/>
 )
 
-const TrackList = ({ tracks, ...flatlistProps }: TrackListProps) => {
-	// const { search, setSearch } = useNavigationSearch({})
+const TrackList = ({ id, tracks, ...flatlistProps }: TrackListProps) => {
+	const queueOffset = useRef(0)
+	const { activeQueueId, setActiveQueueId } = useQueue()
 
-	// const filteredTracks = React.useMemo(() => {
-	// 	const lower = search.toLowerCase()
+	// console.log('current id:', id)
+	// console.log('active queue id:', activeQueueId)
+	// console.log('tracks length:', tracks.length)
 
-	// 	return library.filter(trackTitleFilter(lower))
-	// }, [search])
+	const handleTrackSelect = useCallback(
+		async (selectedTrack: Track) => {
+			const trackIndex = tracks.findIndex((track) => track.url === selectedTrack.url)
 
-	const handleTrackSelect = async (track: Track) => {
-		await TrackPlayer.load(track)
-		await TrackPlayer.play()
-	}
+			if (trackIndex === -1) return
+
+			const isChangingQueue = !activeQueueId || id !== activeQueueId
+
+			if (isChangingQueue) {
+				// console.log(`Rebuilding and Changing queue from ${activeQueueId} to ${selectedTrack.title}`)
+
+				const beforeTracks = tracks.slice(0, trackIndex)
+				const afterTracks = tracks.slice(trackIndex + 1)
+
+				await TrackPlayer.reset()
+				// we construct the new queue with the selected track first
+				await TrackPlayer.add(selectedTrack)
+				await TrackPlayer.add(afterTracks)
+				await TrackPlayer.add(beforeTracks)
+
+				await TrackPlayer.play()
+
+				queueOffset.current = trackIndex
+				setActiveQueueId(id)
+			} else {
+				// console.log(`Changing track to ${selectedTrack.title}`)
+
+				const nextTrackIndex =
+					trackIndex - queueOffset.current < 0
+						? tracks.length + trackIndex - queueOffset.current
+						: trackIndex - queueOffset.current
+
+				await TrackPlayer.skip(nextTrackIndex)
+				await TrackPlayer.play()
+			}
+		},
+		[activeQueueId, id, setActiveQueueId, tracks],
+	)
+
+	const renderItem = useCallback(
+		({ item }: { item: Track }) => <TrackListItem track={item} onTrackSelect={handleTrackSelect} />,
+		[handleTrackSelect],
+	)
 
 	return (
 		<View>
-			{/* {Platform.OS === 'android' && (
-				<CustomSearchHeader
-					query={search}
-					onQueryChange={setSearch}
-					placeholder="Search for songs..."
-				/>
-			)} */}
 			<FlatList
 				data={tracks}
 				contentContainerStyle={{
@@ -58,10 +93,8 @@ const TrackList = ({ tracks, ...flatlistProps }: TrackListProps) => {
 						/>
 					</View>
 				}
-				renderItem={({ item: track }) => (
-					<TrackListItem track={track} onTrackSelect={handleTrackSelect} />
-				)}
-				keyExtractor={(item: any, index) => item.id || index.toString()}
+				renderItem={renderItem}
+				keyExtractor={(item) => item.id || item.url}
 				{...flatlistProps}
 			/>
 		</View>
