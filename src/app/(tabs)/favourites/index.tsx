@@ -8,6 +8,7 @@ import CustomSearchHeader from '@/components/CustomSearchHeader'
 import { useNavigationSearch } from '@/hooks/useNavigationSearch'
 import { useFavoriteTracks } from '@/store/library'
 import { trackTitleFilter } from '@/helpers/filter'
+import { generateTrackListId } from '@/helpers/miscellaneous'
 
 const FavouritesScreen = () => {
 	const { search, setSearch } = useNavigationSearch({
@@ -47,7 +48,11 @@ const FavouritesScreen = () => {
 				contentInsetAdjustmentBehavior="automatic"
 				style={{ paddingHorizontal: screenPadding.horizontal }}
 			>
-				<TrackList tracks={favouriteFilteredTracks} scrollEnabled={false} />
+				<TrackList
+					id={generateTrackListId('favorites', search)}
+					tracks={favouriteFilteredTracks}
+					scrollEnabled={false}
+				/>
 			</ScrollView>
 		</View>
 	)

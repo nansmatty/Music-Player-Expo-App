@@ -7,6 +7,7 @@ import { useNavigationSearch } from '@/hooks/useNavigationSearch'
 import { trackTitleFilter } from '@/helpers/filter'
 import CustomSearchHeader from '@/components/CustomSearchHeader'
 import { useTracks } from '@/store/library'
+import { generateTrackListId } from '@/helpers/miscellaneous'
 
 const SongsScreen = () => {
 	const { search, setSearch } = useNavigationSearch({
@@ -46,7 +47,11 @@ const SongsScreen = () => {
 				contentInsetAdjustmentBehavior="automatic"
 				style={{ paddingHorizontal: screenPadding.horizontal }}
 			>
-				<TrackList tracks={filteredTracks} scrollEnabled={false} />
+				<TrackList
+					id={generateTrackListId('songs', search)}
+					tracks={filteredTracks}
+					scrollEnabled={false}
+				/>
 			</ScrollView>
 		</View>
 	)
