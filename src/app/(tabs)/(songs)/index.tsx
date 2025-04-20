@@ -21,9 +21,7 @@ const SongsScreen = () => {
 	const filteredTracks = React.useMemo(() => {
 		if (!search) return tracks
 
-		const lower = search.toLowerCase()
-
-		return tracks.filter(trackTitleFilter(lower))
+		return tracks.filter(trackTitleFilter(search))
 	}, [search, tracks])
 
 	return (
