@@ -11,8 +11,6 @@ export const useTrackPlayerFavourites = () => {
 	const toggleFavorite = useCallback(async () => {
 		const id = await TrackPlayer.getActiveTrackIndex()
 
-		console.log('ID', id)
-
 		if (id == null) return
 
 		// here we are updating track player internal state
