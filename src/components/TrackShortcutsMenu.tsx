@@ -13,13 +13,13 @@ const TrackShortcutsMenu = ({ track, children }: TrackShortcutsMenuProps) => {
 	const router = useRouter()
 	const isFavourite = track.rating === 1
 
-	const { toogleTrackFavorite } = useFavouriteTracks()
+	const { toggleTrackFavorite } = useFavouriteTracks()
 	const { activeQueueId } = useQueue()
 
 	const handlePressAction = (id: string) => {
 		match(id)
 			.with('add-to-favourite', async () => {
-				toogleTrackFavorite(track)
+				toggleTrackFavorite(track)
 
 				// if the track is not in the favourite queue, then add it
 				if (activeQueueId?.startsWith('favourite')) {
@@ -27,7 +27,7 @@ const TrackShortcutsMenu = ({ track, children }: TrackShortcutsMenuProps) => {
 				}
 			})
 			.with('remove-from-favourite', async () => {
-				toogleTrackFavorite(track)
+				toggleTrackFavorite(track)
 
 				// if the track is in the favourite queue, we need to remove it
 				if (activeQueueId?.startsWith('favourite')) {
