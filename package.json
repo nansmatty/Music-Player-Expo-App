@@ -9,9 +9,12 @@
 		"web": "expo start --web",
 		"lint": "eslint .",
 		"clean:android": "expo prebuild -p android --clean",
-		"clean:ios": "expo prebuild -p ios --clean"
+		"clean:ios": "expo prebuild -p ios --clean",
+		"prebuild:android": "expo prebuild -p android",
+		"prebuild:ios": "expo prebuild -p ios"
 	},
 	"dependencies": {
+		"@react-native-menu/menu": "^1.2.3",
 		"expo": "~52.0.42",
 		"expo-blur": "~14.0.3",
 		"expo-constants": "~17.0.8",

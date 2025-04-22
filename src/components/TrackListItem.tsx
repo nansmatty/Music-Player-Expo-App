@@ -2,11 +2,12 @@ import { unknownTrackImageUri } from '@/constants/images'
 import { colors, fontSize } from '@/constants/tokens'
 import { defaultStyles } from '@/styles'
 import React from 'react'
-import { View, TouchableHighlight, StyleSheet, Text } from 'react-native'
+import { View, TouchableHighlight, StyleSheet, Text, TouchableWithoutFeedback } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { Track, useActiveTrack, useIsPlaying } from 'react-native-track-player'
 import { Entypo, Ionicons } from '@expo/vector-icons'
 import LoaderKit from 'react-native-loader-kit'
+import TrackShortcutsMenu from './TrackShortcutsMenu'
 
 export type TrackListItemProps = {
 	track: Track
@@ -76,7 +77,12 @@ const TrackListItem = ({ track, onTrackSelect: handleTrackSelect }: TrackListIte
 							</Text>
 						)}
 					</View>
-					<Entypo name="dots-three-horizontal" size={18} color={colors.icon} />
+					{/* Track option Menu */}
+					<TrackShortcutsMenu track={track}>
+						<TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
+							<Entypo name="dots-three-horizontal" size={18} color={colors.icon} />
+						</TouchableWithoutFeedback>
+					</TrackShortcutsMenu>
 				</View>
 			</View>
 		</TouchableHighlight>

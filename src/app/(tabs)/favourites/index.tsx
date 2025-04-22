@@ -6,7 +6,7 @@ import TrackList from '@/components/TrackList'
 import { screenPadding } from '@/constants/tokens'
 import CustomSearchHeader from '@/components/CustomSearchHeader'
 import { useNavigationSearch } from '@/hooks/useNavigationSearch'
-import { useFavoriteTracks } from '@/store/library'
+import { useFavouriteTracks } from '@/store/library'
 import { trackTitleFilter } from '@/helpers/filter'
 import { generateTrackListId } from '@/helpers/miscellaneous'
 
@@ -17,7 +17,7 @@ const FavouritesScreen = () => {
 		},
 	})
 
-	const { favouriteTracks } = useFavoriteTracks()
+	const { favouriteTracks } = useFavouriteTracks()
 
 	const favouriteFilteredTracks = useMemo(() => {
 		if (!search) return favouriteTracks
@@ -49,7 +49,7 @@ const FavouritesScreen = () => {
 				style={{ paddingHorizontal: screenPadding.horizontal }}
 			>
 				<TrackList
-					id={generateTrackListId('favorites', search)}
+					id={generateTrackListId('favourites', search)}
 					tracks={favouriteFilteredTracks}
 					scrollEnabled={false}
 				/>
