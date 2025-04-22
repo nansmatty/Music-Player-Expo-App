@@ -1,6 +1,6 @@
-import { StyleSheet, Text, TouchableOpacity, View, ViewProps } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, ViewProps } from 'react-native'
 import React from 'react'
-import { Track, useActiveTrack } from 'react-native-track-player'
+import { useActiveTrack } from 'react-native-track-player'
 import FastImage from 'react-native-fast-image'
 import { unknownTrackImageUri } from '@/constants/images'
 import { defaultStyles } from '@/styles'

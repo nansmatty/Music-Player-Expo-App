@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react'
 import { View, ScrollView, Platform } from 'react-native'
 import { defaultStyles } from '@/styles'
-import library from '@/assets/data/library.json'
 import TrackList from '@/components/TrackList'
 import { screenPadding } from '@/constants/tokens'
 import CustomSearchHeader from '@/components/CustomSearchHeader'

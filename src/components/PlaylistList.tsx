@@ -1,5 +1,5 @@
 import { FlatList, FlatListProps, Text, View } from 'react-native'
-import React, { useCallback } from 'react'
+import React from 'react'
 import { Playlist } from '@/helpers/types'
 import { utilsStyles } from '@/styles'
 import FastImage from 'react-native-fast-image'

@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React, { PropsWithChildren } from 'react'
 import TrackPlayer, { Track } from 'react-native-track-player'
 import { MenuView } from '@react-native-menu/menu'

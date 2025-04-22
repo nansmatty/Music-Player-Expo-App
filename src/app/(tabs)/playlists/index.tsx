@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Platform } from 'react-native'
+import { View, ScrollView, Platform } from 'react-native'
 import React from 'react'
 import { defaultStyles } from '@/styles'
 import { screenPadding } from '@/constants/tokens'
@@ -19,7 +19,7 @@ const PlaylistsScreen = () => {
 		},
 	})
 
-	const { playlists, addToPlaylist } = usePlaylists()
+	const { playlists } = usePlaylists()
 
 	const filteredPlaylists = React.useMemo(() => {
 		if (!search) return playlists

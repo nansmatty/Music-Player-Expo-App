@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View, ViewProps, ViewStyle } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
 import React from 'react'
 import TrackPlayer, { Track } from 'react-native-track-player'
 import { defaultStyles } from '@/styles'
